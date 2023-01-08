@@ -1,0 +1,108 @@
+{%extends 'homepage.html'%}
+{%load static%}
+{%block content%}
+{% include 'include/header.html' %}
+<main id="content">
+    <section class="py-2 bg-gray-2">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb breadcrumb-site py-0 d-flex justify-content-center">
+                    <li class="breadcrumb-item"><a class="text-decoration-none text-body" href="{% url 'index' %}">Главное</a>
+                    </li>
+                    <li class="breadcrumb-item active pl-0 d-flex align-items-center" aria-current="page">Заказ</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+    <section class="pb-lg-13 pb-11">
+        <div class="container">
+            <h2 class="text-center my-9">Заказ</h2>
+            <form method = "POST">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-lg-4 pb-lg-0 pb-11 order-lg-last">
+                        <div class="card border-0" style="box-shadow: 0 0 10px 0 rgba(0,0,0,0.1)">
+                            <div class="card-header px-0 mx-6 bg-transparent py-5">
+                                <h4 class="fs-24 mb-5">Товар</h4>
+                                <div class="media w-100 mb-4">
+                                    <div class="w-60px mr-3">
+                                        <img src="{{product.image.url}}" alt="{{product.title}}">
+                                    </div>
+                                    <div class="media-body d-flex">
+                                        <div class="cart-price pr-6">
+                                            <a href="#" class="text-secondary pr-6">{{product.title}}</a>
+                                            <p class="fs-14 text-secondary mb-0 mt-1">Категория:<span class="text-body"> {{product.category.name}}</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer bg-transparent px-0 pb-1 mx-6">
+                                <div class="d-flex align-items-center font-weight-bold mb-3">
+                                    <span class="text-secondary">Окончательная цена:</span>
+                                    <span class="d-block ml-auto text-secondary fs-24 font-weight-bold">
+                                        {% if product.sale %}{{product.sale_price}}<input type="hidden" name="price" value="{{product.sale_price}}"> {% else %}{{product.price}}<input type="hidden" name="price" value="{{product.price}}"> {% endif %}
+                                        
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 pr-xl-15 order-lg-first form-control-01">
+                        
+                        <h4 class="fs-24 pt-1 mb-4">Ваши данные</h4>
+                        <div class="mb-3">
+                            <label class="mb-2 fs-13 letter-spacing-01 font-weight-600 text-uppercase">Имя</label>
+                            <div class="row">
+                                <div class="col-md-6 mb-md-0 mb-4">
+                                    <input type="text" class="form-control border-0" name="first_name"
+                                           placeholder="Имя" required="">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control border-0" name="last_name"
+                                           placeholder="Фамилие" required="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="row">
+                                <div class="col-md-6 mb-md-0 mb-4">
+                                    <label for="city"
+                                           class="mb-2 fs-13 letter-spacing-01 font-weight-600 text-uppercase">Город</label>
+                                    <input type="text" class="form-control border-0"  name="city" required="">
+                                </div>
+                                <div class="col-md-6 mb-md-0 mb-4">
+                                    <label for="street-address"
+                                           class="mb-2 fs-13 letter-spacing-01 font-weight-600 text-uppercase">Адрес</label>
+                                    <input type="text" class="form-control border-0" 
+                                           name="adres" required="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="mb-2 fs-13 letter-spacing-01 font-weight-600 text-uppercase">Контакты</label>
+                            <div class="row">
+                                <!-- <div class="col-md-6 mb-md-0 mb-4">
+                                    <input type="email" class="form-control border-0" name="email"
+                                           placeholder="Email" required="">
+                                </div> -->
+                                <div class="col-md-12">
+                                    <input type="number" class="form-control border-0" name="phone_number"
+                                           placeholder="Номер телефона" required="">
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-secondary bg-hover-primary border-hover-primary px-7 mt-6">
+                            Оформить заказ
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+</main>
+{%include 'include/footer.html'%}
+{%include 'include/sidebar.html'%}
+
+
+{%endblock%}

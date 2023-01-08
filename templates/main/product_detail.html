@@ -1,0 +1,67 @@
+{%extends 'homepage.html'%}
+{%load static%}
+{%block content%}
+{% include 'include/header.html' %}
+<main id="content">
+    <section class="py-2 bg-gray-2">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb breadcrumb-site py-0 d-flex justify-content-center">
+                    <li class="breadcrumb-item"><a class="text-decoration-none text-body" href="{% url 'index' %}">Главная</a>
+                    </li>
+                    <li class="breadcrumb-item pl-0 d-flex align-items-center"><a class="text-decoration-none text-body" href="{% url 'all_products' %}">Репертуар</a>
+                    </li>
+                    <li class="breadcrumb-item active pl-0 d-flex align-items-center" aria-current="page">{{product.title}}
+                    </li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+    <section class="pt-11 pb-9 pb-lg-10 product-details-layout-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 pr-xl-9 mb-8 mb-md-0">
+                    <div class="galleries-product galleries-product-01 position-relative d-flex ">
+                        
+                        <div class="box px-1 px-xl-0 py-4 pt-xl-0">
+                            <img src="{{product.image.url}}" class="w-100" alt="product gallery">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <p class="d-flex align-items-center mb-3">
+                        {% if product.sale == True %}
+                        <span class="text-line-through">{{product.price}} сом</span>
+                        <span class="fs-18 text-secondary font-weight-bold ml-3">{{product.sale_price}} сом</span>
+                        {% else %}
+                        <span class="fs-18 text-secondary font-weight-bold ml-3">{{product.price}} сом</span>
+                        {% endif %}
+                    </p>
+                    <h2 class="fs-24 mb-2">{{product.title}}</h2>
+                    <p class="mb-5">{{product.description}}</p>
+                    <form>
+                        <a href='{% url 'buy_product' product.id %}'
+                                class="btn btn-lg fs-18 btn-secondary btn-block mb-4 bg-hover-primary border-0">Купить
+                    </a>
+                    </form>
+                    <div class="d-flex align-items-center flex-wrap mt-5">
+                        <a href="#" class="text-decoration-none font-weight-bold fs-16 mr-6 d-flex align-items-center">
+                            <svg class="icon icon-arrows-left-right-light fs-20">
+                                <use xlink:href="#icon-arrows-left-right-light"></use>
+                            </svg>
+                            <span class="ml-2">Поменять</span>
+                        </a>
+                        <a href="#" class="text-decoration-none font-weight-bold fs-16 d-flex align-items-center">
+                            <span class="ml-2">Вернуть</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{%include 'include/footer.html'%}
+{%include 'include/sidebar.html'%}
+
+
+{%endblock%}

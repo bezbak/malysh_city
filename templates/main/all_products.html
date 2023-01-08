@@ -1,0 +1,64 @@
+{%extends 'homepage.html'%}
+{%load static%}
+{%block content%}
+{% include 'include/header.html' %}
+<main id="content">
+    <section class="py-2 bg-gray-2">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb breadcrumb-site py-0 d-flex justify-content-center">
+                    <li class="breadcrumb-item"><a class="text-decoration-none text-body" href="{% url 'index' %}">Главная</a>
+                    </li>
+                    <li class="breadcrumb-item active pl-0 d-flex align-items-center" aria-current="page">Репертуар
+                    </li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+    <section>
+        <div class="container container-xl">
+            <h2 class="text-center mt-9 mb-8">Все товары</h2>
+            <div class="d-flex justify-content-between align-items-center flex-wrap">
+                <p class="fs-18 font-weight-500 my-lg-0 my-2" style="color: #696969;">В общем <strong
+                        class="font-weight-bold text-secondary">{{products.all.count}}</strong>
+                    товаров</p>
+            </div>
+        </div>
+    </section>
+    <section class="mt-7 mb-7">
+        <div class="container container-xl">
+            <div class="row">
+                {% for product in products %}
+                <div class="col-xl-3 col-lg-4 col-md-6">
+                    <div class="card border-0 product mb-6" data-animate="fadeInUp">
+                        <div class="position-relative">
+                            <img src="{{product.image.url}}" alt="Facial cleanser">
+                            {% comment %} <div class="card-img-overlay d-flex p-3 flex-column">
+                                <div>
+                                    <span class="badge badge-primary">-20%</span>
+                                </div>
+                            </div> {% endcomment %}
+                        </div>
+                        <div class="card-body pt-4 text-center px-0">
+                            <p class="card-text font-weight-bold fs-16 mb-1 text-secondary">
+                                {%if product.sale == True%}
+                                        <span class="fs-16 font-weight-500 text-decoration-through text-body pr-1">{{product.price}} сом</span>
+                                        <span>{{product.sale_price}} сом</span>
+                                    {%else%}
+                                        <span>{{product.price}} сом</span>
+                                    {%endif%}
+                            </p>
+                            <h2 class="card-title fs-28 font-weight-500 mb-2"><a href="{% url 'product_detail' product.id %}">{{product.title}}</a></h2>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+</main>
+{%include 'include/footer.html'%}
+{%include 'include/sidebar.html'%}
+
+
+{%endblock%}

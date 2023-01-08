@@ -1,0 +1,58 @@
+{%extends 'homepage.html'%}
+{%load static%}
+{%block content%}
+{% include 'include/header.html' %}
+<main id="content">
+    <section class="slick-slider slider mx-0" data-slick-options='{"slidesToShow": 1,"infinite":true,"autoplay":true,"dots":false,"arrows":false,"fade":true,"cssEase":"ease-in-out","speed":600}'>
+        {% for slide in slider %}
+        <div class="box px-0">
+            <div class="bg-img-cover-center py-12 py-lg-17" style="background-image: url('{{slide.image.url}}');">
+                <div class="container container-xl pt-6 pb-7">
+                    <div data-animate="fadeInDown">
+                        <p style="color:white!important;" class="text-secondary mb-5 text-uppercase font-weight-600">Цена: {{slide.sale_price}} сом</p>
+                        <h1 style="color:white!important;" class="mb-4 fs-56 lh-128">{{slide.title}}</h1>
+                        <p class="fs-18 lh-166 mb-7" style="max-width: 454px; color:white!important;">{{slide.description}}</p>
+                    </div>
+                    <a href="shop-page-04.html" class="btn btn-secondary rounded bg-hover-primary border-0"
+                       data-animate="fadeInUp">Подробнее    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </section>
+    <section class="pt-md-11 pt-9">
+        <div class="container container-xl">
+            <h2 class="text-center mb-3" data-animate="fadeInUp">Наши продукты</h2>
+            <p class="mb-9 fs-18 text-center" data-animate="fadeInUp">Более 1000 брендов одежды и обуви</p>
+            <div class="slick-slider mx-n2"
+                 data-slick-options='{"slidesToShow": 4,"dots":false,"arrows":true,"responsive":[{"breakpoint": 1368,"settings": {"arrows":false,"dots":true}},{"breakpoint": 1200,"settings": {"slidesToShow":3,"arrows":false,"dots":true}},{"breakpoint": 992,"settings": {"slidesToShow":2,"arrows":false,"dots":true}},{"breakpoint": 768,"settings": {"slidesToShow": 2,"arrows":false,"dots":true}},{"breakpoint": 576,"settings": {"slidesToShow": 1,"arrows":false,"dots":true}}]}'>
+                 {% for product in products%}
+                    <div class="box">
+                        <div class="card border-0 product" data-animate="fadeInUp">
+                            <div class="position-relative">
+                                <img src="{{product.image.url}}" alt="Facial cleanser">
+                            </div>
+                            <div class="card-body pt-4 text-center">
+                                <p class="card-text font-weight-bold fs-16 mb-1 text-secondary">
+                                    {%if product.sale == True%}
+                                        <span class="fs-16 font-weight-500 text-decoration-through text-body pr-1">{{product.price}} сом</span>
+                                        <span>{{product.sale_price}} сом</span>
+                                    {%else%}
+                                        <span>{{product.price}} сом</span>
+                                    {%endif%}
+                                </p>
+                                <h2 class="card-title fs-28 font-weight-500 mb-2"><a href="{%url 'product_detail' product.id%}">{{product.title}}</a></h2>
+                            </div>
+                        </div>
+                    </div>
+                {%endfor%}
+                </div>
+            </div>
+    </section>
+</main>
+
+{%include 'include/footer.html'%}
+{%include 'include/sidebar.html'%}
+
+
+{%endblock%}

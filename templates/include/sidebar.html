@@ -1,0 +1,60 @@
+{% load static %}
+<div class="position-fixed pos-fixed-bottom-right p-6 z-index-10">
+    <a href="#"
+       class="gtf-back-to-top text-decoration-none bg-white text-primary hover-white bg-hover-primary shadow p-0 w-48px h-48px rounded-circle fs-20 d-flex align-items-center justify-content-center"
+       title="Back To Top"><i class="fal fa-arrow-up"></i></a>
+</div>
+
+<div class="mfp-hide search-popup mfp-with-anim" id="search-popup">
+    <form action='{% url 'search' %}'>
+        <div class="input-group position-relative">
+            <input type="text" name="key" class="form-control border-0 border-bottom border-2x bg-transparent text-white border-white fs-24 form-control-lg" placeholder="Что ищем...">
+            <div style="cursor: pointer;"  class="input-group-append position-absolute pos-fixed-right-center">
+                <button class="bg-transparent border-0 text-white fs-30 px-0 btn-lg" type="submit"><i class="far fa-search"></i></button>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="sidenav canvas-sidebar bg-white">
+    <div class="canvas-overlay">
+    </div>
+    <div class="pt-5 pb-7 card border-0 h-100">
+        <div class="d-flex align-items-center card-header border-0 py-0 pl-8 pr-7 mb-9 bg-transparent">
+            <a href="{%url 'index'%}" class="d-block w-179px">
+                <img src="{{setting.logo.url}}" class="logo_malysh" alt="Glowing">
+            </a>
+            <span class="canvas-close d-inline-block text-right fs-24 ml-auto lh-1 text-primary"><i
+                    class="fal fa-times"></i></span>
+        </div>
+        <div class="overflow-y-auto pb-6 pl-8 pr-7 card-body pt-0">
+            <ul class="navbar-nav main-menu px-0 ">
+                <li aria-haspopup="true" aria-expanded="false" class="nav-item dropdown py-1 px-0">
+                    <a class="nav-link p-0" href="{%url 'index'%}">
+                        Главная
+                    </a>
+                </li>
+                <li aria-haspopup="true" aria-expanded="false" class="nav-item dropdown py-1 px-0">
+                    <a class="nav-link p-0" href="store.html" >
+                        Репертуар
+                    </a>
+                </li>
+                <li aria-haspopup="true" aria-expanded="false" class="nav-item dropdown py-1 px-0">
+                    <a class="nav-link p-0" href="#" >
+                        Для детей
+                    </a>
+                </li>
+                <li aria-haspopup="true" aria-expanded="false" class="nav-item dropdown py-1 px-0">
+                    <a class="nav-link p-0" href="#" >
+                        Для подростков
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="card-footer bg-transparent border-0 mt-auto pl-8 pr-7 pb-0 pt-4">
+            <p class="mb-0 text-gray">
+                © 2022 Malysh city.<br>
+                Все права защищены.
+            </p>
+        </div>
+    </div>
+</div>
